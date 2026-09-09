@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Dashboard</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER: Greeting + Date/Time ===== -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="greeting-block">
+        <h1 id="greeting">Good Morning!</h1>
+        <p id="current-date" class="date-text"></p>
+      </div>
+      <div class="header-right">
+        <div id="clock" class="clock"></div>
+        <!-- Theme Toggle -->
+        <button class="btn-icon" id="btn-theme" aria-label="Toggle light/dark mode" title="Toggle theme">
+          <span id="theme-icon">🌙</span>
+        </button>
+        <!-- Settings -->
+        <button class="btn-icon" id="btn-settings" aria-label="Open settings" title="Settings">
+          ⚙️
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== SETTINGS PANEL (slide-in drawer) ===== -->
+  <div class="settings-overlay" id="settings-overlay" aria-hidden="true"></div>
+  <aside class="settings-panel" id="settings-panel" aria-label="Settings panel">
+    <div class="settings-header">
+      <h2 class="settings-title">⚙️ Settings</h2>
+      <button class="btn-icon" id="btn-close-settings" aria-label="Close settings">✕</button>
+    </div>
+
+    <!-- Custom Name -->
+    <div class="settings-section">
+      <label class="settings-label" for="settings-name">Your name</label>
+      <p class="settings-hint">Shows in the greeting, e.g. "Good Morning, Alex!"</p>
+      <div class="settings-row">
+        <input
+          type="text"
+          id="settings-name"
+          class="todo-input"
+          placeholder="Enter your name…"
+          maxlength="40"
+        />
+        <button class="btn btn-primary" id="btn-save-name">Save</button>
+      </div>
+    </div>
+
+    <!-- Pomodoro Duration -->
+    <div class="settings-section">
+      <label class="settings-label" for="settings-duration">Pomodoro duration</label>
+      <p class="settings-hint">Minutes per focus session (1 – 120). Resets the timer.</p>
+      <div class="settings-row">
+        <input
+          type="number"
+          id="settings-duration"
+          class="todo-input"
+          min="1"
+          max="120"
+          placeholder="25"
+        />
+        <button class="btn btn-primary" id="btn-save-duration">Set</button>
+      </div>
+      <p class="settings-current" id="duration-display">Current: 25 min</p>
+    </div>
+
+    <!-- Theme Toggle (mirrored inside panel for discoverability) -->
+    <div class="settings-section">
+      <span class="settings-label">Theme</span>
+      <div class="theme-toggle-row">
+        <button class="theme-pill" id="btn-theme-dark">🌙 Dark</button>
+        <button class="theme-pill" id="btn-theme-light">☀️ Light</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="dashboard">
+
+    <!-- ===== FOCUS TIMER ===== -->
+    <section class="card timer-card">
+      <h2 class="card-title">🍅 Focus Timer</h2>
+      <div class="timer-display" id="timer-display">25:00</div>
+      <div class="timer-controls">
+        <button class="btn btn-primary" id="btn-start">Start</button>
+        <button class="btn btn-secondary" id="btn-stop">Stop</button>
+        <button class="btn btn-ghost" id="btn-reset">Reset</button>
+      </div>
+    </section>
+
+    <!-- ===== TO-DO LIST ===== -->
+    <section class="card todo-card">
+      <h2 class="card-title">📝 To-Do List</h2>
+
+      <div class="todo-input-row">
+        <input
+          type="text"
+          id="todo-input"
+          class="todo-input"
+          placeholder="Add a new task..."
+          maxlength="120"
+        />
+        <button class="btn btn-primary" id="btn-add-todo">Add</button>
+      </div>
+
+      <ul class="todo-list" id="todo-list"></ul>
+      <p class="todo-empty" id="todo-empty">No tasks yet. Add one above!</p>
+    </section>
+
+    <!-- ===== QUICK LINKS ===== -->
+    <section class="card links-card">
+      <h2 class="card-title">🔗 Quick Links</h2>
+
+      <div class="link-input-group">
+        <input
+          type="text"
+          id="link-name-input"
+          class="todo-input"
+          placeholder="Label (e.g. YouTube)"
+          maxlength="30"
+        />
+        <input
+          type="url"
+          id="link-url-input"
+          class="todo-input"
+          placeholder="URL (e.g. https://youtube.com)"
+        />
+        <button class="btn btn-primary" id="btn-add-link">Add Link</button>
+      </div>
+
+      <div class="links-grid" id="links-grid"></div>
+      <p class="todo-empty" id="links-empty">No links saved yet.</p>
+    </section>
+
+  </main>
+
+  <!-- ===== EDIT TASK MODAL ===== -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal">
+      <h3 class="modal-title">Edit Task</h3>
+      <input type="text" id="edit-input" class="todo-input" maxlength="120" />
+      <div class="modal-actions">
+        <button class="btn btn-primary" id="btn-save-edit">Save</button>
+        <button class="btn btn-ghost" id="btn-cancel-edit">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
